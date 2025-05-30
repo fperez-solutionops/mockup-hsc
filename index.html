@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital San Camilo - Cuidado de Calidad en San Felipe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Paleta de Colores Mejorada para Hospital */
+        :root {
+            --hospital-primary: #1e40af; /* Azul más confiable */
+            --hospital-secondary: #2563eb; /* Azul más oscuro para mejor contraste */
+            --hospital-accent: #1d4ed8; /* Azul más oscuro que el anterior para mejor legibilidad */
+            --hospital-success: #10b981; /* Verde para información positiva */
+            --hospital-warning: #f59e0b; /* Amarillo para advertencias */
+            --hospital-emergency: #ef4444; /* Rojo para emergencias */
+            --hospital-background: #f8fafc;
+            --hospital-surface: #ffffff;
+            --hospital-text-primary: #111827; /* Texto principal más oscuro */
+            --hospital-text-secondary: #4b5563; /* Texto secundario más oscuro para mejor contraste */
+            --hospital-border: #e5e7eb;
+            --hospital-light-blue: #eff6ff;
+            --hospital-link-color: #1e40af; /* Color específico para enlaces */
+            --hospital-link-hover: #1e3a8a; /* Color para hover de enlaces */
+        }
+
+        /* Banner de Emergencias */
+        .emergency-banner {
+            background: linear-gradient(135deg, var(--hospital-emergency), #dc2626);
+            color: white;
+            padding: 0.75rem 0;
+            font-weight: 600;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .emergency-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .emergency-banner i {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Header Mejorado */
+        .main-header {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--hospital-border);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        
+        .logo-enhanced {
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            border-radius: 0.75rem;
+            background: var(--hospital-light-blue);
+            transition: all 0.3s ease;
+        }
+        
+        .logo-enhanced:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15);
+        }
+        
+        .search-enhanced {
+            position: relative;
+            max-width: 400px;
+        }
+        
+        .search-enhanced input {
+            padding-left: 3rem;
+            padding-right: 1rem;
+            height: 2.75rem;
+            border-radius: 0.75rem;
+            border: 2px solid var(--hospital-border);
+            transition: all 0.3s ease;
+            background: var(--hospital-light-blue);
+        }
+        
+        .search-enhanced input:focus {
+            border-color: var(--hospital-secondary);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+        
+        .search-enhanced .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--hospital-text-secondary);
+        }
+        
+        /* Navegación Mejorada */
+        .nav-enhanced {
+            background: white;
+            border-top: 1px solid var(--hospital-border);
+            padding: 0.75rem 0;
+        }
+        
+        .nav-link-enhanced {
+            position: relative;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            color: var(--hospital-text-primary); /* Cambiado a texto principal para mejor contraste */
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-link-enhanced:hover {
+            background: var(--hospital-light-blue);
+            color: var(--hospital-primary);
+            transform: translateY(-1px);
+        }
+        
+        .nav-link-enhanced.active {
+            background: var(--hospital-primary);
+            color: white;
+            box-shadow: 0 4px 8px rgba(30, 64, 175, 0.25);
+        }
+        
+        /* Indicadores de Servicio */
+        .service-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .service-available {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        
+        .service-limited {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .service-emergency {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .quick-action-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .btn-emergency {
+            background: var(--hospital-emergency);
+            color: white;
+        }
+        
+        .btn-emergency:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(239, 68, 68, 0.3);
+        }
+        
+        .btn-appointment {
+            background: var(--hospital-success);
+            color: white;
+        }
+        
+        .btn-appointment:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn-intranet {
+            background: var(--hospital-light-blue);
+            color: var(--hospital-primary);
+            border: 1px solid var(--hospital-border);
+        }
+        
+        .btn-intranet:hover {
+            background: var(--hospital-primary);
+            color: white;
+        }
+
+        .bg-hospital-primary { background-color: var(--hospital-primary); }
+        .text-hospital-primary { color: var(--hospital-primary); }
+        .bg-hospital-secondary { background-color: var(--hospital-secondary); }
+        .text-hospital-secondary { color: var(--hospital-secondary); }
+        .bg-hospital-accent { background-color: var(--hospital-accent); }
+        .text-hospital-accent { color: var(--hospital-accent); }
+        .bg-hospital-background { background-color: var(--hospital-background); }
+        .bg-hospital-surface { background-color: var(--hospital-surface); }
+        .text-hospital-text-primary { color: var(--hospital-text-primary); }
+        .text-hospital-text-secondary { color: var(--hospital-text-secondary); }
+        .border-hospital-border { border-color: var(--hospital-border); }
+
+        .hero-banner {
+            background-image: linear-gradient(rgba(0, 58, 112, 0.6), rgba(0, 58, 112, 0.3)), url('https://images.unsplash.com/photo-1519494080410-f9aa76cb4283?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .btn-primary {
+            background-color: var(--hospital-secondary);
+            color: white;
+            padding: 0.875rem 2rem; /* Un poco más de padding */
+            border-radius: 0.5rem; /* Bordes más redondeados */
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            box-shadow: 0 4px 14px 0 rgba(0, 122, 255, 0.39);
+            transition: all 0.3s ease-in-out;
+        }
+        .btn-primary:hover {
+            background-color: #0062CC; /* Azul más oscuro para hover */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px 0 rgba(0, 122, 255, 0.45);
+        }
+        .btn-outline {
+            background-color: transparent;
+            color: var(--hospital-secondary);
+            border: 2px solid var(--hospital-secondary);
+            padding: 0.75rem 1.75rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease-in-out;
+        }
+        .btn-outline:hover {
+            background-color: var(--hospital-secondary);
+            color: white;
+        }
+
+        .card {
+            background-color: var(--hospital-surface);
+            border-radius: 0.75rem; /* Bordes más redondeados para tarjetas */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Sombra más suave y difusa */
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--hospital-border);
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+        }
+        .card-content {
+            padding: 1.75rem; /* Más padding interno */
+        }
+
+        .nav-link {
+            color: var(--hospital-text-secondary);
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            position: relative;
+        }
+        .nav-link:hover {
+            color: var(--hospital-secondary);
+            background-color: rgba(0,122,255,0.05);
+        }
+        .nav-link.active-nav-link {
+            color: var(--hospital-secondary);
+            font-weight: 600;
+        }
+        .nav-link.active-nav-link::after { /* Subrayado sutil para el enlace activo */
+            content: '';
+            position: absolute;
+            bottom: -2px; /* Ajusta según el padding del nav */
+            left: 0.75rem;
+            right: 0.75rem;
+            height: 3px;
+            background-color: var(--hospital-secondary);
+            border-radius: 2px;
+        }
+        .sticky-header { /* Para el header fijo */
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: rgba(255,255,255,0.95); /* Fondo ligeramente transparente */
+            backdrop-filter: blur(8px); /* Efecto blur para navegadores compatibles */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .footer-bg {
+            background-color: #1A253C; /* Azul muy oscuro para el footer */
+        }
+        .aspect-card-image {
+            aspect-ratio: 16 / 10; /* Ajustado para un look más moderno */
+        }
+        .aspect-gallery-image {
+            aspect-ratio: 1 / 1;
+        }
+        .section-title {
+            font-size: 2.25rem; /* 36px */
+            font-weight: 700;
+            color: var(--hospital-primary);
+            margin-bottom: 1.5rem; /* Ajustado para subtítulo */
+            text-align: center;
+        }
+        .section-subtitle {
+            font-size: 1.125rem; /* 18px */
+            color: var(--hospital-text-secondary);
+            text-align: center;
+            margin-bottom: 3rem; /* 48px */
+            max-width: 700px; /* Un poco más ancho */
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+        .page-header-bg {
+            background-color: var(--hospital-primary);
+            color: white;
+        }
+        .breadcrumb-link {
+            color: var(--hospital-accent);
+        }
+        .breadcrumb-link:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        .content-text p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+            color: var(--hospital-text-secondary);
+        }
+        .content-text h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--hospital-text-primary);
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+        }
+        .content-text ul {
+            list-style: disc;
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--hospital-text-secondary);
+        }
+        .service-card-icon {
+            height: 64px; /* Altura fija para el contenedor del icono/imagen */
+            width: 64px;  /* Ancho fijo */
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 1.25rem; /* Espacio debajo del icono */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%; /* Hacerlo circular */
+            background-color: rgba(0,122,255,0.1); /* Fondo suave para el icono */
+            overflow: hidden; /* Para asegurar que la imagen no se salga del círculo */
+        }
+        .service-card-icon img {
+            height: 100%; /* Hacer que la imagen llene el contenedor */
+            width: 100%;
+            object-fit: cover; /* Asegurar que la imagen cubra el área sin distorsionarse */
+        }
+
+        /* Enlaces Mejorados */
+        .link-primary {
+            color: var(--hospital-link-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        
+        .link-primary:hover {
+            color: var(--hospital-link-hover);
+            text-decoration: underline;
+        }
+        
+        /* Textos con mejor contraste */
+        .text-accent-strong {
+            color: var(--hospital-accent);
+            font-weight: 600;
+        }
+        
+        .text-secondary-strong {
+            color: var(--hospital-secondary);
+            font-weight: 500;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .quick-access-card {
+            background: var(--hospital-surface);
+            padding: 2rem 1.5rem;
+            border-radius: 0.75rem;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .quick-access-card:hover {
+            border-color: var(--hospital-secondary);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .service-card {
+            background-color: var(--hospital-surface);
+            border-radius: 0.75rem; /* Bordes más redondeados para tarjetas */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); /* Sombra más suave y difusa */
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--hospital-border);
+        }
+        .service-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Mejoras adicionales de contraste */
+        .text-hospital-text-primary { 
+            color: #0f172a !important; /* Negro más fuerte */
+        }
+        .text-hospital-text-secondary { 
+            color: #334155 !important; /* Gris más oscuro */
+        }
+        
+        /* Footer mejorado */
+        .footer-bg {
+            background-color: #0f172a; /* Fondo más oscuro */
+            color: #e2e8f0; /* Texto más claro */
+        }
+        
+        .footer-bg h3 {
+            color: #ffffff !important;
+        }
+        
+        .footer-bg a {
+            color: #94a3b8;
+            transition: color 0.2s ease;
+        }
+        
+        .footer-bg a:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+        
+        /* Navegación con mejor contraste */
+        .nav-link-enhanced {
+            color: #1e293b !important; /* Texto aún más oscuro */
+        }
+        
+        /* Texto de servicios */
+        .service-indicator {
+            font-weight: 700; /* Más negrita */
+        }
+        
+        /* Breadcrumbs mejorados */
+        .breadcrumb-link {
+            color: #ddd6fe !important;
+        }
+        
+        .breadcrumb-link:hover {
+            color: #ffffff !important;
+        }
+        
+        /* Títulos de sección más fuertes */
+        .section-title {
+            color: #1e40af !important;
+            font-weight: 800;
+        }
+        
+        .section-subtitle {
+            color: #374151 !important;
+            font-weight: 500;
+        }
+        
+        /* Texto de tarjetas más legible */
+        .card h3 {
+            color: #111827 !important;
+            font-weight: 700;
+        }
+        
+        .card p {
+            color: #374151 !important;
+        }
+        
+        /* Emergency banner con mejor contraste */
+        .emergency-banner {
+            color: #ffffff !important;
+            font-weight: 700;
+        }
+        
+        /* Botones con mejor definición */
+        .btn-primary {
+            color: #ffffff !important;
+            font-weight: 700;
+        }
+        
+        .btn-outline {
+            color: #1e40af !important;
+            border-color: #1e40af !important;
+            font-weight: 600;
+        }
+        
+        /* Quick action buttons con mejor contraste */
+        .quick-action-btn {
+            font-weight: 700;
+        }
+        
+        /* Form labels más fuertes */
+        label {
+            color: #111827 !important;
+            font-weight: 600;
+        }
+        
+        /* Indicadores de tiempo más legibles */
+        .text-xs {
+            color: #4b5563 !important;
+            font-weight: 500;
+        }
+
+        /* Mejoras adicionales de contraste */
+        .card-title {
+            color: #111827 !important;
+            font-weight: 600;
+        }
+        
+        .card-subtitle {
+            color: #374151 !important;
+            font-weight: 500;
+        }
+        
+        .card-description {
+            color: #4b5563 !important;
+        }
+        
+        .status-available {
+            background-color: #10b981 !important;
+            color: white !important;
+            font-weight: 600;
+        }
+        
+        .status-limited {
+            background-color: #f59e0b !important;
+            color: white !important;
+            font-weight: 600;
+        }
+        
+        .status-unavailable {
+            background-color: #ef4444 !important;
+            color: white !important;
+            font-weight: 600;
+        }
+        
+        .service-hours {
+            color: #1f2937 !important;
+            font-weight: 500;
+        }
+        
+        .service-card {
+            border: 1px solid #e5e7eb;
+        }
+        
+        .quick-access-card h3 {
+            color: #111827 !important;
+            font-weight: 600;
+        }
+        
+        .stats-title {
+            color: white !important;
+            font-weight: 700;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .stats-subtitle {
+            color: rgba(255,255,255,0.9) !important;
+            font-weight: 500;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body class="bg-hospital-background text-hospital-text-primary">
+
+    <!-- Banner de Emergencias -->
+    <div class="emergency-banner">
+        <div class="container mx-auto px-6">
+            <div class="flex items-center justify-center gap-4 text-sm">
+                <i class="fas fa-ambulance"></i>
+                <span><strong>URGENCIAS 24/7:</strong> (+56) 34 259-1234 | Av. Miraflores 2085, San Felipe</span>
+                <span class="service-indicator service-emergency">
+                    <i class="fas fa-circle text-xs"></i>
+                    Activo
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <header class="main-header sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <!-- Header Principal -->
+            <div class="flex flex-col lg:flex-row justify-between items-center gap-4">
+                <!-- Logo y Título Mejorado -->
+                <div class="logo-enhanced">
+                    <img src="https://placehold.co/60x60/1e40af/FFFFFF?text=HSC&font=inter" alt="Logo Hospital San Camilo" class="h-16 w-16 rounded-lg shadow-sm">
+                    <div class="ml-4">
+                        <h1 class="text-2xl font-bold text-hospital-primary">Hospital San Camilo</h1>
+                        <p class="text-sm text-hospital-text-secondary flex items-center gap-1">
+                            <i class="fas fa-map-marker-alt"></i>
+                            San Felipe de Aconcagua
+                        </p>
+                        <div class="flex gap-2 mt-1">
+                            <span class="service-indicator service-available">
+                                <i class="fas fa-check"></i>
+                                Acreditado MINSAL
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sección de Búsqueda y Acciones Rápidas -->
+                <div class="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">
+                    <!-- Búsqueda Mejorada -->
+                    <div class="search-enhanced w-full sm:w-auto">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="search" placeholder="Buscar especialidades, médicos, servicios..." class="w-full">
+                    </div>
+                    
+                    <!-- Acciones Rápidas -->
+                    <div class="quick-actions">
+                        <a href="#urgencias" class="quick-action-btn btn-emergency">
+                            <i class="fas fa-ambulance"></i>
+                            Urgencias
+                        </a>
+                        <a href="#agendar" class="quick-action-btn btn-appointment">
+                            <i class="fas fa-calendar-plus"></i>
+                            Agendar
+                        </a>
+                        <a href="#intranet" class="quick-action-btn btn-intranet">
+                            <i class="fas fa-user-md"></i>
+                            Intranet
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navegación Mejorada -->
+            <nav class="nav-enhanced mt-4">
+                <ul class="flex flex-wrap justify-center lg:justify-start items-center gap-2">
+                    <li>
+                        <a href="#inicio" class="nav-link-enhanced active">
+                            <i class="fas fa-home"></i>
+                            Inicio
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#nosotros" class="nav-link-enhanced">
+                            <i class="fas fa-hospital"></i>
+                            Nosotros
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#servicios" class="nav-link-enhanced">
+                            <i class="fas fa-stethoscope"></i>
+                            Servicios Clínicos
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#pacientes" class="nav-link-enhanced">
+                            <i class="fas fa-user-injured"></i>
+                            Pacientes
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#noticias" class="nav-link-enhanced">
+                            <i class="fas fa-newspaper"></i>
+                            Noticias
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#trabajo" class="nav-link-enhanced">
+                            <i class="fas fa-briefcase-medical"></i>
+                            Trabaja con Nosotros
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#contacto" class="nav-link-enhanced">
+                            <i class="fas fa-phone"></i>
+                            Contacto
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="inicio" class="hero-banner text-white py-20 md:py-32 relative overflow-hidden">
+            <div class="container mx-auto px-6">
+                <!-- Hero Principal -->
+                <div class="text-center max-w-4xl mx-auto">
+                    <div class="mb-6">
+                        <span class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-semibold">
+                            <i class="fas fa-award text-yellow-300"></i>
+                            Más de 50 años cuidando tu salud
+                        </span>
+                    </div>
+                    
+                    <h2 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+                        Cuidando tu Salud, 
+                        <br class="hidden md:block">
+                        <span class="text-yellow-300">Cerca de Ti</span>
+                    </h2>
+                    
+                    <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed">
+                        Comprometidos con el bienestar integral de la comunidad de San Felipe y sus alrededores, 
+                        ofreciendo atención médica de calidad con calidez humana.
+                    </p>
+                    
+                    <!-- CTAs Principales -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                        <a href="#servicios" class="btn-primary" style="background-color: white !important; color: #1e40af !important; font-weight: 700;">
+                            <i class="fas fa-stethoscope mr-2"></i>
+                            Ver Especialidades
+                        </a>
+                        <a href="#urgencias" class="btn-primary bg-red-600 hover:bg-red-700">
+                            <i class="fas fa-ambulance mr-2"></i>
+                            Urgencias 24/7
+                        </a>
+                        <a href="#agendar" class="btn-outline border-white text-white hover:bg-white hover:text-hospital-primary">
+                            <i class="fas fa-calendar-plus mr-2"></i>
+                            Agendar Cita
+                        </a>
+                    </div>
+                    
+                    <!-- Indicadores de Confianza -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                        <div class="bg-white/20 backdrop-blur-sm rounded-lg p-6 text-center">
+                            <div class="text-3xl font-bold stats-title mb-2">50+</div>
+                            <div class="stats-subtitle">Años de Experiencia</div>
+                        </div>
+                        <div class="bg-white/20 backdrop-blur-sm rounded-lg p-6 text-center">
+                            <div class="text-3xl font-bold stats-title mb-2">98%</div>
+                            <div class="stats-subtitle">Satisfacción de Pacientes</div>
+                        </div>
+                        <div class="bg-white/20 backdrop-blur-sm rounded-lg p-6 text-center">
+                            <div class="text-3xl font-bold stats-title mb-2">24/7</div>
+                            <div class="stats-subtitle">Atención de Urgencias</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+            <!-- Elemento Decorativo -->
+            <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-hospital-background to-transparent"></div>
+        </section>
+
+        <!-- Sección de Servicios de Urgencia -->
+        <section class="py-12 bg-hospital-surface border-b border-hospital-border">
+            <div class="container mx-auto px-6">
+                <div class="grid md:grid-cols-3 gap-8 text-center">
+                    <div class="flex items-center justify-center gap-4">
+                        <div class="bg-green-100 p-3 rounded-full">
+                            <i class="fas fa-clock text-green-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-hospital-text-primary">Atención 24/7</h3>
+                            <p class="text-sm text-hospital-text-secondary">Urgencias médicas siempre disponibles</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-center gap-4">
+                        <div class="bg-blue-100 p-3 rounded-full">
+                            <i class="fas fa-user-md text-blue-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-hospital-text-primary">Especialistas Calificados</h3>
+                            <p class="text-sm text-hospital-text-secondary">Profesionales con amplia experiencia</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center justify-center gap-4">
+                        <div class="bg-purple-100 p-3 rounded-full">
+                            <i class="fas fa-microscope text-purple-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-hospital-text-primary">Tecnología Avanzada</h3>
+                            <p class="text-sm text-hospital-text-secondary">Equipamiento médico de última generación</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Agendamiento Online -->
+        <section class="py-16 md:py-24 bg-hospital-surface border-t border-hospital-border">
+            <div class="container mx-auto px-6">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4 text-hospital-primary">
+                            <i class="fas fa-calendar-plus mr-3"></i>
+                            Agenda tu Hora Online
+                        </h2>
+                        <p class="text-lg max-w-2xl mx-auto text-hospital-text-secondary">
+                            Sistema inteligente de agendamiento disponible 24/7. Selecciona tu especialidad, profesional preferido y horario que mejor te acomode.
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl p-8 shadow-xl border border-hospital-border">
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <!-- Formulario de Agendamiento -->
+                            <div>
+                                <h3 class="text-xl font-semibold text-hospital-text-primary mb-6">
+                                    Reserva tu Cita Médica
+                                </h3>
+                                
+                                <form class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-hospital-text-primary mb-2">
+                                            <i class="fas fa-stethoscope mr-2 text-hospital-secondary"></i>
+                                            Especialidad
+                                        </label>
+                                        <select class="w-full p-3 border border-hospital-border rounded-lg focus:ring-2 focus:ring-hospital-secondary focus:border-transparent">
+                                            <option>Seleccionar especialidad...</option>
+                                            <option>Medicina General</option>
+                                            <option>Cardiología</option>
+                                            <option>Pediatría</option>
+                                            <option>Ginecología y Obstetricia</option>
+                                            <option>Cirugía General</option>
+                                            <option>Kinesiología</option>
+                                            <option>Odontología</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-sm font-medium text-hospital-text-primary mb-2">
+                                            <i class="fas fa-user-md mr-2 text-hospital-secondary"></i>
+                                            Profesional (Opcional)
+                                        </label>
+                                        <select class="w-full p-3 border border-hospital-border rounded-lg focus:ring-2 focus:ring-hospital-secondary focus:border-transparent">
+                                            <option>Cualquier profesional disponible</option>
+                                            <option>Dr. Rodriguez González</option>
+                                            <option>Dra. Ana Pérez</option>
+                                            <option>Dr. Carlos López</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-hospital-text-primary mb-2">
+                                                <i class="fas fa-calendar mr-2 text-hospital-secondary"></i>
+                                                Fecha Preferida
+                                            </label>
+                                            <input type="date" class="w-full p-3 border border-hospital-border rounded-lg focus:ring-2 focus:ring-hospital-secondary focus:border-transparent">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-hospital-text-primary mb-2">
+                                                <i class="fas fa-clock mr-2 text-hospital-secondary"></i>
+                                                Horario
+                                            </label>
+                                            <select class="w-full p-3 border border-hospital-border rounded-lg focus:ring-2 focus:ring-hospital-secondary focus:border-transparent">
+                                                <option>Mañana (08:00 - 12:00)</option>
+                                                <option>Tarde (14:00 - 18:00)</option>
+                                                <option>Cualquier horario</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <button type="submit" class="w-full bg-hospital-secondary text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-600 transition-colors duration-300 flex items-center justify-center gap-2">
+                                        <i class="fas fa-search"></i>
+                                        Buscar Disponibilidad
+                                    </button>
+                                </form>
+                                
+                                <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                                    <div class="flex items-start gap-3">
+                                        <i class="fas fa-info-circle text-hospital-secondary mt-1"></i>
+                                        <div class="text-sm text-hospital-text-secondary">
+                                            <strong>Próximamente disponible:</strong> Sistema de agendamiento online en desarrollo. 
+                                            Mientras tanto, puedes llamar al <strong>(+56) 34 259-1234</strong> para agendar tu cita.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Información Adicional -->
+                            <div class="space-y-6">
+                                <div>
+                                    <h4 class="font-semibold text-hospital-text-primary mb-3 flex items-center gap-2">
+                                        <i class="fas fa-clock text-hospital-secondary"></i>
+                                        Horarios de Atención
+                                    </h4>
+                                    <div class="space-y-2 text-sm text-hospital-text-secondary">
+                                        <div class="flex justify-between">
+                                            <span>Lunes a Viernes:</span>
+                                            <span class="font-medium">08:00 - 20:00</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span>Sábados:</span>
+                                            <span class="font-medium">08:00 - 14:00</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span>Domingos:</span>
+                                            <span class="font-medium">Solo Urgencias</span>
+                                        </div>
+                                        <div class="flex justify-between border-t pt-2 mt-2">
+                                            <span class="text-red-600 font-medium">Urgencias:</span>
+                                            <span class="text-red-600 font-medium">24/7</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="font-semibold text-hospital-text-primary mb-3 flex items-center gap-2">
+                                        <i class="fas fa-id-card text-hospital-secondary"></i>
+                                        Documentos Necesarios
+                                    </h4>
+                                    <ul class="space-y-2 text-sm text-hospital-text-secondary">
+                                        <li class="flex items-center gap-2">
+                                            <i class="fas fa-check text-green-500 text-xs"></i>
+                                            Cédula de identidad
+                                        </li>
+                                        <li class="flex items-center gap-2">
+                                            <i class="fas fa-check text-green-500 text-xs"></i>
+                                            Credencial de seguro (FONASA/ISAPRE)
+                                        </li>
+                                        <li class="flex items-center gap-2">
+                                            <i class="fas fa-check text-green-500 text-xs"></i>
+                                            Derivación médica (si corresponde)
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="bg-green-50 p-4 rounded-lg">
+                                    <div class="flex items-center gap-2 text-green-800 font-medium mb-2">
+                                        <i class="fas fa-shield-alt"></i>
+                                        Protocolos COVID-19
+                                    </div>
+                                    <p class="text-sm text-green-700">
+                                        Mantenemos estrictos protocolos de seguridad sanitaria para proteger a nuestros pacientes y personal médico.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="nosotros" class="py-16 md:py-24 bg-hospital-surface">
+            <div class="container mx-auto px-6">
+                <div class="text-center">
+                    <h2 class="section-title">Sobre el Hospital San Camilo</h2>
+                    <p class="section-subtitle">Conoce nuestra historia, misión, visión y el equipo que trabaja día a día por tu salud y bienestar en San Felipe de Aconcagua.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="content-text">
+                        <h3>Nuestra Misión</h3>
+                        <p>Proporcionar atención de salud integral, segura y de calidad a la comunidad de San Felipe y sus alrededores, con un enfoque en la humanización, la eficiencia y el desarrollo continuo de nuestro personal, contribuyendo al bienestar y la calidad de vida de nuestros pacientes y sus familias.</p>
+                        <h3>Nuestra Visión</h3>
+                        <p>Ser un hospital de referencia en la región de Valparaíso, reconocido por su excelencia clínica, la calidez de su atención, su compromiso con la comunidad y la innovación en la gestión de salud, adaptándonos a las necesidades cambiantes de nuestros usuarios.</p>
+                        <h3>Nuestros Valores</h3>
+                        <ul>
+                            <li>Compromiso con el Paciente</li>
+                            <li>Excelencia y Calidad</li>
+                            <li>Respeto y Empatía</li>
+                            <li>Trabajo en Equipo</li>
+                            <li>Transparencia y Probidad</li>
+                            <li>Innovación y Mejora Continua</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="[Edificio moderno del Hospital San Camilo o área de recepción acogedora]" class="rounded-lg shadow-xl w-full">
+                    </div>
+                </div>
+                <div class="mt-16 content-text">
+                    <h3>Equipo Directivo (Ejemplo)</h3>
+                    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8 mt-6">
+                        <div class="text-center p-4 border border-hospital-border rounded-lg bg-white">
+                            <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80" alt="[Foto profesional del Director del Hospital]" class="w-24 h-24 rounded-full mx-auto mb-3 object-cover">
+                            <h4 class="font-semibold text-hospital-text-primary">Dr. Rodrigo González Escobar</h4>
+                            <p class="text-sm text-hospital-secondary">Director del Hospital</p>
+                        </div>
+                        <div class="text-center p-4 border border-hospital-border rounded-lg bg-white">
+                            <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80" alt="[Foto profesional de la Subdirectora Médica]" class="w-24 h-24 rounded-full mx-auto mb-3 object-cover">
+                            <h4 class="font-semibold text-hospital-text-primary">Dra. Ana Pérez</h4>
+                            <p class="text-sm text-hospital-secondary">Subdirectora Médica</p>
+                        </div>
+                        <div class="text-center p-4 border border-hospital-border rounded-lg bg-white">
+                            <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300&q=80" alt="[Foto profesional del Jefe de Enfermería]" class="w-24 h-24 rounded-full mx-auto mb-3 object-cover">
+                            <h4 class="font-semibold text-hospital-text-primary">Enf. Carlos López</h4>
+                            <p class="text-sm text-hospital-secondary">Jefe de Enfermería</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="servicios" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center">
+                    <h2 class="section-title">Nuestros Servicios Clínicos</h2>
+                    <p class="section-subtitle">Ofrecemos una amplia gama de especialidades y servicios médicos para cubrir tus necesidades de salud, con profesionales altamente calificados y tecnología moderna.</p>
+                </div>
+                
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Medicina General -->
+                    <div class="service-card card animate-on-scroll" data-aos="fade-up">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-user-md text-3xl text-hospital-primary mr-4"></i>
+                                <div class="flex-1">
+                                    <h3 class="card-title text-xl font-semibold mb-1">Medicina General</h3>
+                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium status-available">
+                                        <i class="fas fa-circle text-xs mr-1"></i>
+                                        Disponible
+                                    </span>
+                                </div>
+                            </div>
+                            <p class="card-description mb-4">Atención médica integral para adultos y familias. Consultas preventivas, diagnóstico y tratamiento de enfermedades comunes.</p>
+                            <div class="flex justify-between items-center text-sm mb-4">
+                                <span class="service-hours"><i class="far fa-clock mr-1"></i>Lun-Vie: 8:00-18:00</span>
+                                <span class="card-subtitle">Dr. Juan Pérez</span>
+                            </div>
+                            <a href="#medicina-general" class="link-primary">Más información &rarr;</a>
+                        </div>
+                    </div>
+
+                    <!-- Cardiología -->
+                    <div class="service-card card animate-on-scroll" data-aos="fade-up">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-heartbeat text-3xl text-hospital-primary mr-4"></i>
+                                <div class="flex-1">
+                                    <h3 class="card-title text-xl font-semibold mb-1">Cardiología</h3>
+                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium status-available">
+                                        <i class="fas fa-circle text-xs mr-1"></i>
+                                        Disponible
+                                    </span>
+                                </div>
+                            </div>
+                            <p class="card-description mb-4">Atención especializada del corazón y sistema cardiovascular. Electrocardiogramas, ecocardiografías y tratamientos cardíacos.</p>
+                            <div class="flex justify-between items-center text-sm mb-4">
+                                <span class="service-hours"><i class="far fa-clock mr-1"></i>Lun-Vie: 9:00-17:00</span>
+                                <span class="card-subtitle">Dra. Ana González</span>
+                            </div>
+                            <a href="#cardiologia" class="link-primary">Más información &rarr;</a>
+                        </div>
+                    </div>
+
+                    <!-- Pediatría -->
+                    <div class="service-card card animate-on-scroll" data-aos="fade-up">
+                        <div class="p-6">
+                            <div class="flex items-center mb-4">
+                                <i class="fas fa-baby text-3xl text-hospital-primary mr-4"></i>
+                                <div class="flex-1">
+                                    <h3 class="card-title text-xl font-semibold mb-1">Pediatría</h3>
+                                    <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium status-limited">
+                                        <i class="fas fa-circle text-xs mr-1"></i>
+                                        Acceso Limitado
+                                    </span>
+                                </div>
+                            </div>
+                            <p class="card-description mb-4">Atención médica especializada para niños desde el nacimiento hasta la adolescencia. Controles de salud y vacunación.</p>
+                            <div class="flex justify-between items-center text-sm mb-4">
+                                <span class="service-hours"><i class="far fa-clock mr-1"></i>Lun-Vie: 8:00-16:00</span>
+                                <span class="card-subtitle">Dr. Carlos Herrera</span>
+                            </div>
+                            <a href="#pediatria" class="link-primary">Más información &rarr;</a>
+                        </div>
+                    </div>
+
+                    <!-- Ginecología y Obstetricia -->
+                    <div class="card text-center group hover:border-hospital-secondary transition-all duration-300">
+                        <div class="card-content">
+                            <div class="service-card-icon bg-pink-100 group-hover:bg-pink-200 transition-colors">
+                                <i class="fas fa-female text-pink-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2 text-hospital-text-primary">Ginecología y Obstetricia</h3>
+                            <div class="mb-3">
+                                <span class="service-indicator service-available">
+                                    <i class="fas fa-circle text-xs"></i>
+                                    Disponible
+                                </span>
+                            </div>
+                            <p class="text-sm text-hospital-text-secondary mb-4">Atención especializada para la salud de la mujer en todas las etapas de su vida.</p>
+                            <div class="text-xs text-hospital-text-secondary mb-4">
+                                <i class="fas fa-clock mr-1"></i>
+                                Lun-Vie: 08:00-18:00 | Urgencias 24/7
+                            </div>
+                            <a href="#servicio-ginecologia" class="link-primary text-sm flex items-center justify-center gap-1">
+                                Más Información <i class="fas fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Cirugía General -->
+                    <div class="card text-center group hover:border-hospital-secondary transition-all duration-300">
+                        <div class="card-content">
+                            <div class="service-card-icon bg-purple-100 group-hover:bg-purple-200 transition-colors">
+                                <i class="fas fa-procedures text-purple-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2 text-hospital-text-primary">Cirugía General</h3>
+                            <div class="mb-3">
+                                <span class="service-indicator service-limited">
+                                    <i class="fas fa-clock text-xs"></i>
+                                    Lista de Espera
+                                </span>
+                            </div>
+                            <p class="text-sm text-hospital-text-secondary mb-4">Procedimientos quirúrgicos programados y de urgencia con altos estándares.</p>
+                            <div class="text-xs text-hospital-text-secondary mb-4">
+                                <i class="fas fa-clock mr-1"></i>
+                                Lun-Vie: Programadas | Urgencias 24/7
+                            </div>
+                            <a href="#servicio-cirugia" class="link-primary text-sm flex items-center justify-center gap-1">
+                                Más Información <i class="fas fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Laboratorio Clínico -->
+                    <div class="card text-center group hover:border-hospital-secondary transition-all duration-300">
+                        <div class="card-content">
+                            <div class="service-card-icon bg-teal-100 group-hover:bg-teal-200 transition-colors">
+                                <i class="fas fa-microscope text-teal-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2 text-hospital-text-primary">Laboratorio Clínico</h3>
+                            <div class="mb-3">
+                                <span class="service-indicator service-available">
+                                    <i class="fas fa-circle text-xs"></i>
+                                    Disponible
+                                </span>
+                            </div>
+                            <p class="text-sm text-hospital-text-secondary mb-4">Exámenes y análisis para un diagnóstico preciso y oportuno.</p>
+                            <div class="text-xs text-hospital-text-secondary mb-4">
+                                <i class="fas fa-clock mr-1"></i>
+                                Lun-Vie: 07:00-16:00 | Sáb: 08:00-12:00
+                            </div>
+                            <a href="#servicio-laboratorio" class="link-primary text-sm flex items-center justify-center gap-1">
+                                Más Información <i class="fas fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Kinesiología -->
+                    <div class="card text-center group hover:border-hospital-secondary transition-all duration-300">
+                        <div class="card-content">
+                            <div class="service-card-icon bg-orange-100 group-hover:bg-orange-200 transition-colors">
+                                <i class="fas fa-dumbbell text-orange-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2 text-hospital-text-primary">Kinesiología</h3>
+                            <div class="mb-3">
+                                <span class="service-indicator service-available">
+                                    <i class="fas fa-circle text-xs"></i>
+                                    Disponible
+                                </span>
+                            </div>
+                            <p class="text-sm text-hospital-text-secondary mb-4">Rehabilitación física y funcional para mejorar tu calidad de vida.</p>
+                            <div class="text-xs text-hospital-text-secondary mb-4">
+                                <i class="fas fa-clock mr-1"></i>
+                                Lun-Vie: 08:00-18:00 | Sáb: 08:00-13:00
+                            </div>
+                            <a href="#servicio-kinesiologia" class="link-primary text-sm flex items-center justify-center gap-1">
+                                Más Información <i class="fas fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Odontología -->
+                    <div class="card text-center group hover:border-hospital-secondary transition-all duration-300">
+                        <div class="card-content">
+                            <div class="service-card-icon bg-indigo-100 group-hover:bg-indigo-200 transition-colors">
+                                <i class="fas fa-tooth text-indigo-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2 text-hospital-text-primary">Odontología</h3>
+                            <div class="mb-3">
+                                <span class="service-indicator service-available">
+                                    <i class="fas fa-circle text-xs"></i>
+                                    Disponible
+                                </span>
+                            </div>
+                            <p class="text-sm text-hospital-text-secondary mb-4">Salud bucal integral para niños y adultos. Urgencias dentales.</p>
+                            <div class="text-xs text-hospital-text-secondary mb-4">
+                                <i class="fas fa-clock mr-1"></i>
+                                Lun-Vie: 09:00-18:00 | Urgencias Lun-Vie
+                            </div>
+                            <a href="#servicio-odontologia" class="link-primary text-sm flex items-center justify-center gap-1">
+                                Más Información <i class="fas fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Farmacia -->
+                    <div class="card text-center group hover:border-hospital-secondary transition-all duration-300">
+                        <div class="card-content">
+                            <div class="service-card-icon bg-emerald-100 group-hover:bg-emerald-200 transition-colors">
+                                <i class="fas fa-pills text-emerald-600 text-2xl"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2 text-hospital-text-primary">Farmacia</h3>
+                            <div class="mb-3">
+                                <span class="service-indicator service-available">
+                                    <i class="fas fa-circle text-xs"></i>
+                                    Disponible
+                                </span>
+                            </div>
+                            <p class="text-sm text-hospital-text-secondary mb-4">Dispensación de medicamentos y orientación farmacéutica.</p>
+                            <div class="text-xs text-hospital-text-secondary mb-4">
+                                <i class="fas fa-clock mr-1"></i>
+                                Lun-Dom: 08:00-22:00 | 24/7 Urgencias
+                            </div>
+                            <a href="#servicio-farmacia" class="link-primary text-sm flex items-center justify-center gap-1">
+                                Más Información <i class="fas fa-arrow-right text-xs"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Botón Ver Todos los Servicios -->
+                <div class="text-center mt-12">
+                    <a href="#todos-servicios" class="btn-primary inline-flex items-center gap-2">
+                        <i class="fas fa-list"></i>
+                        Ver Todos los Servicios y Especialidades
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="noticias" class="py-16 md:py-24 bg-hospital-surface">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Noticias y Novedades</h2>
+                <p class="section-subtitle">Mantente al día con las últimas noticias, avances y eventos de nuestro hospital.</p>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="[Persona recibiendo una vacuna en el brazo]" class="w-full h-52 object-cover aspect-card-image">
+                        <div class="card-content">
+                            <p class="text-xs text-hospital-accent font-semibold uppercase mb-2">Salud Pública</p>
+                            <h3 class="text-xl font-semibold mb-3 text-hospital-text-primary">Nueva Campaña de Vacunación Invierno 2025</h3>
+                            <p class="text-sm text-hospital-text-secondary mb-1">15 de Mayo, 2025</p>
+                            <p class="text-hospital-text-secondary mb-5 text-sm leading-relaxed">Informamos a la comunidad sobre la nueva campaña de vacunación contra la influenza y otros virus respiratorios. Acércate a nuestros puntos habilitados.</p>
+                            <a href="#noticia1" class="link-primary text-sm">Leer más &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1551190822-a9333d879b1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="[Máquina de resonancia magnética en sala de hospital]" class="w-full h-52 object-cover aspect-card-image">
+                        <div class="card-content">
+                            <p class="text-xs text-accent-strong font-semibold uppercase mb-2">Tecnología y Avances</p>
+                            <h3 class="text-xl font-semibold mb-3 text-hospital-text-primary">Incorporación de Nuevo Equipamiento Diagnóstico</h3>
+                            <p class="text-sm text-hospital-text-secondary mb-1">10 de Mayo, 2025</p>
+                            <p class="text-hospital-text-secondary mb-5 text-sm leading-relaxed">Hemos adquirido tecnología de punta para mejorar la calidad y precisión de nuestros diagnósticos y tratamientos. Conoce más aquí.</p>
+                            <a href="#noticia2" class="link-primary text-sm">Leer más &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="[Grupo de personas asistiendo a una charla o reunión]" class="w-full h-52 object-cover aspect-card-image">
+                        <div class="card-content">
+                            <p class="text-xs text-accent-strong font-semibold uppercase mb-2">Comunidad</p>
+                            <h3 class="text-xl font-semibold mb-3 text-hospital-text-primary">Exitosa Charla sobre Prevención de Diabetes</h3>
+                            <p class="text-sm text-hospital-text-secondary mb-1">05 de Mayo, 2025</p>
+                            <p class="text-hospital-text-secondary mb-5 text-sm leading-relaxed">Agradecemos la gran participación en nuestra charla gratuita sobre cómo prevenir la diabetes y fomentar un estilo de vida saludable.</p>
+                            <a href="#noticia3" class="link-primary text-sm">Leer más &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-12">
+                    <a href="#todas-las-noticias" class="btn-outline">Ver Todas las Noticias</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 md:py-24 bg-hospital-background"> 
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Accesos Rápidos</h2>
+                <p class="section-subtitle">Encuentra rápidamente la información y servicios que necesitas.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="quick-access-card text-center">
+                        <img src="https://images.unsplash.com/photo-1504813184591-01572f98c85f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200&q=80" alt="[Ícono de emergencia médica]" class="w-16 h-16 mx-auto mb-4">
+                        <h3 class="text-xl font-semibold mb-3 text-hospital-text-primary">Urgencias</h3>
+                        <p class="text-hospital-text-secondary mb-4 text-sm">Atención médica de emergencia las 24 horas</p>
+                        <a href="#urgencias" class="link-primary">Más información &rarr;</a>
+                    </div>
+                    <div class="quick-access-card text-center">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200&q=80" alt="[Ícono de calendario para citas médicas]" class="w-16 h-16 mx-auto mb-4">
+                        <h3 class="text-xl font-semibold mb-3 text-hospital-text-primary">Agendar Cita</h3>
+                        <p class="text-hospital-text-secondary mb-4 text-sm">Programa tu cita médica de forma rápida y sencilla</p>
+                        <a href="#agendar" class="link-primary">Reservar hora &rarr;</a>
+                    </div>
+                    <div class="quick-access-card text-center">
+                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200&q=80" alt="[Ícono de derechos del paciente]" class="w-16 h-16 mx-auto mb-4">
+                        <h3 class="text-xl font-semibold mb-3 text-hospital-text-primary">Derechos del Paciente</h3>
+                        <p class="text-hospital-text-secondary mb-4 text-sm">Conoce tus derechos y deberes como paciente</p>
+                        <a href="#derechos" class="link-primary">Ver derechos &rarr;</a>
+                    </div>
+                    <div class="quick-access-card text-center">
+                        <img src="https://images.unsplash.com/photo-1471107340929-a87cd0f5b5f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&h=200&q=80" alt="[Ícono de boletín informativo]" class="w-16 h-16 mx-auto mb-4">
+                        <h3 class="text-xl font-semibold mb-3 text-hospital-text-primary">Boletín Institucional</h3>
+                        <p class="text-hospital-text-secondary mb-4 text-sm">Mantente informado con nuestras últimas noticias</p>
+                        <a href="#boletin" class="link-primary">Leer boletín &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="eventos" class="py-16 md:py-24 bg-hospital-surface"> 
+            <div class="container mx-auto px-6">
+                <h2 class="section-title">Nuestra Comunidad en Acción</h2>
+                <p class="section-subtitle">Compartimos momentos de nuestras actividades, talleres y eventos con la comunidad.</p>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
+                    <div class="card p-0 group"><img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="[Grupo de personas colaborando en un evento comunitario]" class="w-full h-full object-cover aspect-gallery-image group-hover:scale-105 transition-transform duration-300"></div>
+                    <div class="card p-0 group"><img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="[Personas participando en un taller de salud]" class="w-full h-full object-cover aspect-gallery-image group-hover:scale-105 transition-transform duration-300"></div>
+                    <div class="card p-0 group"><img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="[Profesionales de la salud en una charla educativa]" class="w-full h-full object-cover aspect-gallery-image group-hover:scale-105 transition-transform duration-300"></div>
+                    <div class="card p-0 group"><img src="https://images.unsplash.com/photo-1504813184591-01572f98c85f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="[Voluntarios del hospital en una actividad]" class="w-full h-full object-cover aspect-gallery-image group-hover:scale-105 transition-transform duration-300"></div>
+                    <div class="card p-0 group"><img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="[Personal del hospital en un evento institucional]" class="w-full h-full object-cover aspect-gallery-image group-hover:scale-105 transition-transform duration-300"></div>
+                    <div class="card p-0 group"><img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="[Celebración o aniversario del hospital]" class="w-full h-full object-cover aspect-gallery-image group-hover:scale-105 transition-transform duration-300"></div>
+                    <div class="card p-0 group"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="[Feria de salud organizada por el hospital en la comunidad]" class="w-full h-full object-cover aspect-gallery-image group-hover:scale-105 transition-transform duration-300"></div>
+                    <div class="card p-0 group"><img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="[Equipo médico sonriendo y colaborando]" class="w-full h-full object-cover aspect-gallery-image group-hover:scale-105 transition-transform duration-300"></div>
+                </div>
+                 <div class="text-center mt-12">
+                    <a href="#galeria-completa" class="btn-primary">Ver Galería Completa</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="pacientes" class="py-16 md:py-24 bg-hospital-background">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="section-title">Información para Pacientes</h2>
+                <p class="section-subtitle">Aquí encontrarás guías, horarios, derechos y deberes, y todo lo que necesitas saber para tu visita o estadía en el Hospital San Camilo. Contenido próximamente.</p>
+                <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="[Doctora explicando información a un paciente con una tablet]" class="mt-8 rounded-lg shadow-lg mx-auto max-w-2xl">
+            </div>
+        </section>
+
+        <section id="trabajo" class="py-16 md:py-24 bg-hospital-surface">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="section-title">Trabaja con Nosotros</h2>
+                <p class="section-subtitle">Buscamos profesionales comprometidos con la salud y el servicio a la comunidad. Conoce nuestras oportunidades laborales y cómo puedes unirte al equipo del Hospital San Camilo. Información de postulaciones próximamente.</p>
+                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="[Equipo diverso de profesionales de la salud colaborando sonrientes]" class="mt-8 rounded-lg shadow-lg mx-auto max-w-2xl">
+            </div>
+        </section>
+
+        <section id="contacto" class="py-16 md:py-24 bg-hospital-background">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="section-title">Contáctanos</h2>
+                <p class="section-subtitle">Estamos para ayudarte. Encuentra aquí nuestros datos de contacto, ubicación o envíanos tu consulta a través de nuestro formulario. Detalles de contacto y formulario próximamente.</p>
+                <div class="mt-8 max-w-4xl mx-auto bg-hospital-surface p-8 rounded-lg shadow-xl">
+                    <p class="text-hospital-text-primary text-lg">Av. Miraflores 2085, San Felipe, Región de Valparaíso</p>
+                    <p class="text-hospital-text-primary text-lg mt-2">Teléfono: (+56) 34 259 XXXX (Ejemplo)</p>
+                    <p class="text-hospital-text-primary text-lg mt-2">Email: contacto@hsc.cl (Ejemplo)</p>
+                    <div class="mt-6 h-64 bg-gray-300 rounded-md flex items-center justify-center">
+                        <p class="text-gray-500">[Espacio para Mapa Interactivo o Formulario de Contacto]</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <img src="https://placehold.co/120x60/1e40af/FFFFFF?text=HSC&font=inter" alt="Hospital San Camilo Logo" class="h-12 mb-4">
+                    <p class="text-gray-300 text-sm leading-relaxed">Hospital San Camilo - Brindando atención médica de calidad con compromiso y excelencia desde hace más de 50 años.</p>
+                    
+                    <!-- Logo MINSAL -->
+                    <div class="mt-6 pt-4 border-t border-gray-700">
+                        <p class="text-gray-400 text-xs mb-2">Acreditado por:</p>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Logo_del_MINSAL_Chile.png" alt="Ministerio de Salud - Gobierno de Chile" class="h-8 opacity-80 hover:opacity-100 transition-opacity">
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Contacto</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><span class="text-gray-300">📞 Teléfono:</span> <a href="tel:+56444444444" class="text-blue-300 hover:text-blue-200">+56 (44) 444-4444</a></li>
+                        <li><span class="text-gray-300">🚨 Urgencias:</span> <a href="tel:+56444444000" class="text-red-300 hover:text-red-200">+56 (44) 444-4000</a></li>
+                        <li><span class="text-gray-300">📧 Email:</span> <a href="mailto:contacto@hospitalsancamilo.cl" class="text-blue-300 hover:text-blue-200">contacto@hospitalsancamilo.cl</a></li>
+                        <li><span class="text-gray-300">📍 Dirección:</span> <span class="text-gray-300">Av. Principal 123, San Camilo</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Servicios</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#medicina-general" class="text-gray-300 hover:text-white">Medicina General</a></li>
+                        <li><a href="#cardiologia" class="text-gray-300 hover:text-white">Cardiología</a></li>
+                        <li><a href="#pediatria" class="text-gray-300 hover:text-white">Pediatría</a></li>
+                        <li><a href="#ginecologia" class="text-gray-300 hover:text-white">Ginecología</a></li>
+                        <li><a href="#cirugia" class="text-gray-300 hover:text-white">Cirugía</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Información</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#agendar" class="text-gray-300 hover:text-white">Agendar Cita</a></li>
+                        <li><a href="#derechos" class="text-gray-300 hover:text-white">Derechos del Paciente</a></li>
+                        <li><a href="#preguntas" class="text-gray-300 hover:text-white">Preguntas Frecuentes</a></li>
+                        <li><a href="#trabaja" class="text-gray-300 hover:text-white">Trabaja con Nosotros</a></li>
+                        <li><a href="#noticias" class="text-gray-300 hover:text-white">Noticias</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="text-gray-400 text-sm">&copy; <span id="currentYear">2024</span> Hospital San Camilo. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        const navLinks = document.querySelectorAll('.nav-link-enhanced');
+        const headerNav = document.querySelector('header nav');
+
+        // Función para actualizar el enlace activo basado en el scroll
+        function updateActiveLinkOnScroll() {
+            let currentSectionId = 'inicio';
+            const sections = document.querySelectorAll('main section[id]');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - (headerNav.closest('header').offsetHeight || 0) - 80; 
+                if (window.scrollY >= sectionTop) {
+                    currentSectionId = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSectionId}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // Event listener para el scroll
+        window.addEventListener('scroll', updateActiveLinkOnScroll);
+        updateActiveLinkOnScroll();
+
+        // Manejo de clic en enlaces de navegación
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+
+                if (targetSection) {
+                    let headerHeight = headerNav.closest('header').offsetHeight || 0;
+                    let targetPosition = targetSection.offsetTop - headerHeight - 40;
+                    
+                    if (targetId === '#inicio') {
+                        targetPosition = 0;
+                    }
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    navLinks.forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Animación para los indicadores de servicio
+        const serviceCards = document.querySelectorAll('.card');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-in');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        serviceCards.forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+
+</body>
+</html>
