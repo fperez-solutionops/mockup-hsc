@@ -620,270 +620,6 @@
             font-weight: 500;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
-
-        /* Botón Hamburguesa Animado */
-        #mobile-menu-btn {
-            position: relative;
-            z-index: 60;
-        }
-        
-        #mobile-menu-btn .hamburger-line {
-            transform-origin: center;
-        }
-        
-        #mobile-menu-btn.active .hamburger-line:first-child {
-            transform: translateY(8px) rotate(45deg);
-        }
-        
-        #mobile-menu-btn.active .hamburger-line:nth-child(2) {
-            opacity: 0;
-            transform: scaleX(0);
-        }
-        
-        #mobile-menu-btn.active .hamburger-line:last-child {
-            transform: translateY(-8px) rotate(-45deg);
-        }
-        
-        /* Menú Mobile Mejorado */
-        #mobile-menu {
-            animation-duration: 0.3s;
-            animation-fill-mode: both;
-        }
-        
-        #mobile-menu.show {
-            animation-name: slideDown;
-        }
-        
-        #mobile-menu.hide {
-            animation-name: slideUp;
-        }
-        
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes slideUp {
-            from {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            to {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-        }
-        
-        /* Responsive improvements */
-        @media (max-width: 640px) {
-            .container {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-            
-            .main-header .container {
-                padding-top: 0.75rem;
-                padding-bottom: 0.75rem;
-            }
-            
-            .main-header h1 {
-                font-size: 1rem;
-                line-height: 1.25rem;
-            }
-            
-            .main-header p {
-                font-size: 0.75rem;
-                line-height: 1rem;
-            }
-            
-            .service-indicator {
-                font-size: 0.625rem;
-                padding: 0.125rem 0.25rem;
-            }
-            
-            #mobile-menu-btn {
-                width: 2.5rem;
-                height: 2.5rem;
-            }
-            
-            .hamburger-line {
-                width: 1rem;
-                height: 2px;
-            }
-            
-            #mobile-menu {
-                margin-top: 0.75rem;
-                border-radius: 0.5rem;
-            }
-            
-            #mobile-menu .search-enhanced input {
-                padding: 0.5rem 0.75rem;
-                font-size: 0.875rem;
-            }
-            
-            #mobile-menu nav ul li a {
-                padding: 0.75rem 1rem;
-                font-size: 0.875rem;
-            }
-            
-            #mobile-menu .grid {
-                gap: 0.5rem;
-            }
-            
-            #mobile-menu .grid a {
-                padding: 0.75rem 0.5rem;
-            }
-            
-            .emergency-banner {
-                padding: 0.5rem 1rem;
-                font-size: 0.75rem;
-            }
-            
-            .quick-action-btn {
-                padding: 0.25rem 0.5rem;
-                font-size: 0.75rem;
-            }
-        }
-
-        @media (min-width: 641px) and (max-width: 1023px) {
-            .main-header .container {
-                padding: 1rem;
-            }
-            
-            .main-header h1 {
-                font-size: 1.25rem;
-            }
-            
-            .main-header p {
-                font-size: 0.875rem;
-            }
-            
-            #mobile-menu-btn {
-                width: 2.75rem;
-                height: 2.75rem;
-            }
-            
-            .hamburger-line {
-                width: 1.25rem;
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .main-header .container {
-                padding: 1.5rem;
-            }
-            
-            .main-header h1 {
-                font-size: 1.5rem;
-            }
-            
-            .quick-actions {
-                display: flex;
-                gap: 0.5rem;
-            }
-            
-            .search-enhanced {
-                min-width: 300px;
-            }
-        }
-
-        /* Mejoras en la estructura del logo y título */
-        .main-header .flex.items-center.flex-1 {
-            overflow: hidden;
-        }
-        
-        .main-header .flex.items-center.flex-1 img {
-            flex-shrink: 0;
-        }
-        
-        .main-header .flex.items-center.flex-1 > div {
-            overflow: hidden;
-            min-width: 0;
-        }
-        
-        .main-header h1 {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .main-header p {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        /* Hamburger Button Animation */
-        #mobile-menu-btn.active .hamburger-line:nth-child(1) {
-            transform: rotate(45deg) translate(3px, 3px);
-        }
-        
-        #mobile-menu-btn.active .hamburger-line:nth-child(2) {
-            opacity: 0;
-            transform: translateX(20px);
-        }
-        
-        #mobile-menu-btn.active .hamburger-line:nth-child(3) {
-            transform: rotate(-45deg) translate(3px, -3px);
-        }
-
-        /* Mobile Menu Animation */
-        #mobile-menu.show {
-            display: block;
-            animation: slideDown 0.3s ease-out forwards;
-        }
-        
-        #mobile-menu.hide {
-            animation: slideUp 0.3s ease-out forwards;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            to {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-        }
-
-        /* Ajustes específicos para el mobile menu */
-        #mobile-menu nav ul li {
-            border-bottom: 1px solid #e5e7eb;
-        }
-        
-        #mobile-menu nav ul li:last-child {
-            border-bottom: none;
-        }
-        
-        #mobile-menu nav ul li a:hover {
-            background-color: #f0f9ff;
-            color: #1e40af;
-        }
-        
-        #mobile-menu nav ul li a.active {
-            background-color: #dbeafe;
-            color: #1e40af;
-            border-left: 3px solid #1e40af;
-        }
     </style>
 </head>
 <body class="bg-hospital-background text-hospital-text-primary">
@@ -903,20 +639,19 @@
     </div>
 
     <header class="main-header sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-3">
+        <div class="container mx-auto px-6 py-4">
             <!-- Header Principal -->
-            <div class="flex justify-between items-center">
-                <!-- Logo y Título - Versión Mobile -->
-                <div class="flex items-center flex-1 min-w-0">
-                    <img src="https://placehold.co/60x60/1e40af/FFFFFF?text=HSC&font=inter" alt="Logo Hospital San Camilo" class="h-12 w-12 md:h-16 md:w-16 rounded-lg shadow-sm flex-shrink-0">
-                    <div class="ml-3 min-w-0 flex-1">
-                        <h1 class="text-lg md:text-2xl font-bold text-hospital-primary truncate">Hospital San Camilo</h1>
-                        <p class="text-xs md:text-sm text-hospital-text-secondary flex items-center gap-1">
+            <div class="flex flex-col lg:flex-row justify-between items-center gap-4">
+                <!-- Logo y Título Mejorado -->
+                <div class="logo-enhanced">
+                    <img src="https://placehold.co/60x60/1e40af/FFFFFF?text=HSC&font=inter" alt="Logo Hospital San Camilo" class="h-16 w-16 rounded-lg shadow-sm">
+                    <div class="ml-4">
+                        <h1 class="text-2xl font-bold text-hospital-primary">Hospital San Camilo</h1>
+                        <p class="text-sm text-hospital-text-secondary flex items-center gap-1">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span class="hidden sm:inline">San Felipe de Aconcagua</span>
-                            <span class="sm:hidden">San Felipe</span>
+                            San Felipe de Aconcagua
                         </p>
-                        <div class="hidden md:flex gap-2 mt-1">
+                        <div class="flex gap-2 mt-1">
                             <span class="service-indicator service-available">
                                 <i class="fas fa-check"></i>
                                 Acreditado MINSAL
@@ -925,17 +660,10 @@
                     </div>
                 </div>
 
-                <!-- Botón Hamburguesa (solo mobile) -->
-                <button id="mobile-menu-btn" class="lg:hidden flex flex-col items-center justify-center w-10 h-10 rounded-lg bg-hospital-light-blue hover:bg-hospital-secondary hover:text-white transition-colors duration-300 border border-hospital-border flex-shrink-0 ml-3">
-                    <span class="hamburger-line block w-5 h-0.5 bg-current transition-all duration-300"></span>
-                    <span class="hamburger-line block w-5 h-0.5 bg-current mt-1 transition-all duration-300"></span>
-                    <span class="hamburger-line block w-5 h-0.5 bg-current mt-1 transition-all duration-300"></span>
-                </button>
-
-                <!-- Sección de Búsqueda y Acciones Rápidas (solo desktop) -->
-                <div id="header-actions" class="hidden lg:flex items-center gap-4 ml-4">
+                <!-- Sección de Búsqueda y Acciones Rápidas -->
+                <div class="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">
                     <!-- Búsqueda Mejorada -->
-                    <div class="search-enhanced">
+                    <div class="search-enhanced w-full sm:w-auto">
                         <i class="fas fa-search search-icon"></i>
                         <input type="search" placeholder="Buscar especialidades, médicos, servicios..." class="w-full">
                     </div>
@@ -958,8 +686,8 @@
                 </div>
             </div>
 
-            <!-- Navegación Desktop -->
-            <nav id="main-navigation" class="nav-enhanced mt-4 hidden lg:block">
+            <!-- Navegación Mejorada -->
+            <nav class="nav-enhanced mt-4">
                 <ul class="flex flex-wrap justify-center lg:justify-start items-center gap-2">
                     <li>
                         <a href="#inicio" class="nav-link-enhanced active">
@@ -1005,83 +733,6 @@
                     </li>
                 </ul>
             </nav>
-
-            <!-- Menú Mobile -->
-            <div id="mobile-menu" class="lg:hidden hidden mt-4 bg-white border border-hospital-border rounded-lg shadow-lg overflow-hidden">
-                <!-- Búsqueda Mobile -->
-                <div class="p-4 border-b border-hospital-border">
-                    <div class="search-enhanced">
-                        <i class="fas fa-search search-icon"></i>
-                        <input type="search" placeholder="Buscar..." class="w-full text-sm">
-                    </div>
-                </div>
-                
-                <!-- Navegación Mobile -->
-                <nav class="py-2">
-                    <ul class="space-y-0">
-                        <li>
-                            <a href="#inicio" class="nav-link-enhanced active flex items-center gap-3 px-4 py-3 hover:bg-hospital-light-blue border-b border-gray-100 last:border-b-0">
-                                <i class="fas fa-home w-4 text-hospital-secondary"></i>
-                                <span class="text-hospital-text-primary">Inicio</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#nosotros" class="nav-link-enhanced flex items-center gap-3 px-4 py-3 hover:bg-hospital-light-blue border-b border-gray-100 last:border-b-0">
-                                <i class="fas fa-hospital w-4 text-hospital-secondary"></i>
-                                <span class="text-hospital-text-primary">Nosotros</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#servicios" class="nav-link-enhanced flex items-center gap-3 px-4 py-3 hover:bg-hospital-light-blue border-b border-gray-100 last:border-b-0">
-                                <i class="fas fa-stethoscope w-4 text-hospital-secondary"></i>
-                                <span class="text-hospital-text-primary">Servicios Clínicos</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#pacientes" class="nav-link-enhanced flex items-center gap-3 px-4 py-3 hover:bg-hospital-light-blue border-b border-gray-100 last:border-b-0">
-                                <i class="fas fa-user-injured w-4 text-hospital-secondary"></i>
-                                <span class="text-hospital-text-primary">Pacientes</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#noticias" class="nav-link-enhanced flex items-center gap-3 px-4 py-3 hover:bg-hospital-light-blue border-b border-gray-100 last:border-b-0">
-                                <i class="fas fa-newspaper w-4 text-hospital-secondary"></i>
-                                <span class="text-hospital-text-primary">Noticias</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#trabajo" class="nav-link-enhanced flex items-center gap-3 px-4 py-3 hover:bg-hospital-light-blue border-b border-gray-100 last:border-b-0">
-                                <i class="fas fa-briefcase-medical w-4 text-hospital-secondary"></i>
-                                <span class="text-hospital-text-primary">Trabaja con Nosotros</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#contacto" class="nav-link-enhanced flex items-center gap-3 px-4 py-3 hover:bg-hospital-light-blue">
-                                <i class="fas fa-phone w-4 text-hospital-secondary"></i>
-                                <span class="text-hospital-text-primary">Contacto</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                
-                <!-- Acciones Rápidas Mobile -->
-                <div class="p-4 border-t border-hospital-border bg-gray-50">
-                    <div class="grid grid-cols-3 gap-3">
-                        <a href="#urgencias" class="flex flex-col items-center p-3 bg-red-600 text-white rounded-lg text-center text-sm hover:bg-red-700 transition-colors">
-                            <i class="fas fa-ambulance text-lg mb-1"></i>
-                            <span class="text-xs font-medium">Urgencias</span>
-                        </a>
-                        <a href="#agendar" class="flex flex-col items-center p-3 bg-green-600 text-white rounded-lg text-center text-sm hover:bg-green-700 transition-colors">
-                            <i class="fas fa-calendar-plus text-lg mb-1"></i>
-                            <span class="text-xs font-medium">Agendar</span>
-                        </a>
-                        <a href="login.html" class="flex flex-col items-center p-3 bg-hospital-secondary text-white rounded-lg text-center text-sm hover:bg-blue-700 transition-colors">
-                            <i class="fas fa-user-md text-lg mb-1"></i>
-                            <span class="text-xs font-medium">Intranet</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
         </div>
     </header>
 
@@ -1795,58 +1446,8 @@
 
     <script>
         document.getElementById('currentYear').textContent = new Date().getFullYear();
-        
-        // Referencias a elementos
         const navLinks = document.querySelectorAll('.nav-link-enhanced');
         const headerNav = document.querySelector('header nav');
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileNavLinks = document.querySelectorAll('#mobile-menu .nav-link-enhanced');
-
-        // Función para el menú móvil
-        function toggleMobileMenu() {
-            const isHidden = mobileMenu.classList.contains('hidden');
-            
-            if (isHidden) {
-                // Mostrar menú
-                mobileMenu.classList.remove('hidden');
-                mobileMenu.classList.add('show');
-                mobileMenu.classList.remove('hide');
-                mobileMenuBtn.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevenir scroll
-            } else {
-                // Ocultar menú
-                mobileMenu.classList.add('hide');
-                mobileMenu.classList.remove('show');
-                mobileMenuBtn.classList.remove('active');
-                document.body.style.overflow = ''; // Restaurar scroll
-                
-                // Esperar a que termine la animación antes de ocultar
-                setTimeout(() => {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenu.classList.remove('hide');
-                }, 300);
-            }
-        }
-
-        // Event listener para el botón hamburguesa
-        mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-
-        // Cerrar menú móvil al hacer click en un enlace
-        mobileNavLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (!mobileMenu.classList.contains('hidden')) {
-                    toggleMobileMenu();
-                }
-            });
-        });
-
-        // Cerrar menú móvil al redimensionar la ventana
-        window.addEventListener('resize', () => {
-            if (window.innerWidth >= 1024 && !mobileMenu.classList.contains('hidden')) {
-                toggleMobileMenu();
-            }
-        });
 
         // Función para actualizar el enlace activo basado en el scroll
         function updateActiveLinkOnScroll() {
@@ -1860,16 +1461,7 @@
                 }
             });
 
-            // Actualizar enlaces del menú desktop
             navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${currentSectionId}`) {
-                    link.classList.add('active');
-                }
-            });
-
-            // Actualizar enlaces del menú mobile
-            mobileNavLinks.forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('href') === `#${currentSectionId}`) {
                     link.classList.add('active');
@@ -1881,48 +1473,29 @@
         window.addEventListener('scroll', updateActiveLinkOnScroll);
         updateActiveLinkOnScroll();
 
-        // Función para manejar clic en enlaces de navegación (tanto desktop como mobile)
-        function handleNavClick(event, linkElement) {
-            event.preventDefault();
-            const targetId = linkElement.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-
-            if (targetSection) {
-                let headerHeight = headerNav.closest('header').offsetHeight || 0;
-                let targetPosition = targetSection.offsetTop - headerHeight - 40;
-                
-                if (targetId === '#inicio') {
-                    targetPosition = 0;
-                }
-
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-
-                // Actualizar estados activos
-                navLinks.forEach(nav => nav.classList.remove('active'));
-                mobileNavLinks.forEach(nav => nav.classList.remove('active'));
-                linkElement.classList.add('active');
-                
-                // Encontrar el enlace correspondiente en el otro menú y activarlo también
-                const href = linkElement.getAttribute('href');
-                const correspondingLinks = document.querySelectorAll(`a[href="${href}"].nav-link-enhanced`);
-                correspondingLinks.forEach(link => link.classList.add('active'));
-            }
-        }
-
-        // Manejo de clic en enlaces de navegación desktop
+        // Manejo de clic en enlaces de navegación
         navLinks.forEach(link => {
             link.addEventListener('click', function(event) {
-                handleNavClick(event, this);
-            });
-        });
+                event.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
 
-        // Manejo de clic en enlaces de navegación mobile
-        mobileNavLinks.forEach(link => {
-            link.addEventListener('click', function(event) {
-                handleNavClick(event, this);
+                if (targetSection) {
+                    let headerHeight = headerNav.closest('header').offsetHeight || 0;
+                    let targetPosition = targetSection.offsetTop - headerHeight - 40;
+                    
+                    if (targetId === '#inicio') {
+                        targetPosition = 0;
+                    }
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    navLinks.forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
+                }
             });
         });
 
@@ -1938,16 +1511,6 @@
 
         serviceCards.forEach(card => {
             observer.observe(card);
-        });
-
-        // Cerrar menú móvil al hacer click fuera de él
-        document.addEventListener('click', (event) => {
-            const isClickInsideMenu = mobileMenu.contains(event.target);
-            const isClickOnMenuBtn = mobileMenuBtn.contains(event.target);
-            
-            if (!isClickInsideMenu && !isClickOnMenuBtn && !mobileMenu.classList.contains('hidden')) {
-                toggleMobileMenu();
-            }
         });
     </script>
 

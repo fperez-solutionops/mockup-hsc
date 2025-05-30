@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intranet - Hospital San Camilo | Acceso Personal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Paleta de Colores del Hospital */
+        :root {
+            --hospital-primary: #1e40af;
+            --hospital-secondary: #2563eb;
+            --hospital-accent: #1d4ed8;
+            --hospital-success: #10b981;
+            --hospital-warning: #f59e0b;
+            --hospital-emergency: #ef4444;
+            --hospital-background: #f8fafc;
+            --hospital-surface: #ffffff;
+            --hospital-text-primary: #111827;
+            --hospital-text-secondary: #4b5563;
+            --hospital-border: #e5e7eb;
+            --hospital-light-blue: #eff6ff;
+        }
+
+        /* Fondo animado */
+        .animated-bg {
+            background: linear-gradient(135deg, #1e40af, #2563eb, #3b82f6);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Efectos de glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Animaciones de entrada */
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Inputs mejorados */
+        .form-input {
+            transition: all 0.3s ease;
+            border: 2px solid var(--hospital-border);
+        }
+        
+        .form-input:focus {
+            border-color: var(--hospital-secondary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            outline: none;
+        }
+
+        /* Botón de login mejorado */
+        .btn-login {
+            background: linear-gradient(135deg, var(--hospital-secondary), var(--hospital-primary));
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(30, 64, 175, 0.3);
+        }
+        
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        /* Elementos decorativos */
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 20s infinite linear;
+        }
+        
+        .shape:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            top: 20%;
+            left: 10%;
+            animation-duration: 25s;
+        }
+        
+        .shape:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            right: 15%;
+            animation-duration: 30s;
+            animation-direction: reverse;
+        }
+        
+        .shape:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            bottom: 20%;
+            left: 20%;
+            animation-duration: 35s;
+        }
+        
+        @keyframes float {
+            from { transform: translateY(0px) rotate(0deg); }
+            to { transform: translateY(-20px) rotate(360deg); }
+        }
+
+        /* Indicadores de seguridad */
+        .security-badge {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #065f46;
+        }
+
+        /* Mensaje de error/éxito */
+        .alert {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            display: none;
+        }
+        
+        .alert-error {
+            background-color: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #991b1b;
+        }
+        
+        .alert-success {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .login-container {
+                margin: 1rem;
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body class="animated-bg min-h-screen flex items-center justify-center p-4">
+    
+    <!-- Elementos decorativos flotantes -->
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <!-- Contenedor principal de login -->
+    <div class="glass-card login-container rounded-2xl p-8 w-full max-w-md fade-in-up relative z-10">
+        
+        <!-- Header con logo y título -->
+        <div class="text-center mb-8">
+            <div class="flex justify-center mb-4">
+                <div class="bg-hospital-light-blue p-4 rounded-2xl">
+                    <img src="https://placehold.co/80x80/1e40af/FFFFFF?text=HSC&font=inter" alt="Logo Hospital San Camilo" class="h-16 w-16">
+                </div>
+            </div>
+            <h1 class="text-2xl font-bold text-hospital-text-primary mb-2">Intranet Hospital San Camilo</h1>
+            <p class="text-hospital-text-secondary text-sm">Acceso exclusivo para personal autorizado</p>
+        </div>
+
+        <!-- Indicadores de seguridad -->
+        <div class="security-badge rounded-lg p-3 mb-6 text-center">
+            <div class="flex items-center justify-center gap-2 text-sm font-medium">
+                <i class="fas fa-shield-alt"></i>
+                <span>Conexión Segura SSL</span>
+                <i class="fas fa-lock"></i>
+            </div>
+        </div>
+
+        <!-- Mensajes de alerta -->
+        <div id="error-alert" class="alert alert-error">
+            <div class="flex items-center gap-2">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span id="error-message">Credenciales incorrectas. Intente nuevamente.</span>
+            </div>
+        </div>
+
+        <div id="success-alert" class="alert alert-success">
+            <div class="flex items-center gap-2">
+                <i class="fas fa-check-circle"></i>
+                <span>Acceso autorizado. Redirigiendo...</span>
+            </div>
+        </div>
+
+        <!-- Formulario de login -->
+        <form id="login-form" class="space-y-6">
+            
+            <!-- Campo de usuario -->
+            <div>
+                <label for="username" class="block text-sm font-semibold text-hospital-text-primary mb-2">
+                    <i class="fas fa-user mr-2 text-hospital-secondary"></i>
+                    Usuario / RUT
+                </label>
+                <input 
+                    type="text" 
+                    id="username" 
+                    name="username" 
+                    class="form-input w-full px-4 py-3 rounded-lg" 
+                    placeholder="Ingrese su RUT o usuario"
+                    required
+                    autocomplete="username">
+            </div>
+
+            <!-- Campo de contraseña -->
+            <div>
+                <label for="password" class="block text-sm font-semibold text-hospital-text-primary mb-2">
+                    <i class="fas fa-lock mr-2 text-hospital-secondary"></i>
+                    Contraseña
+                </label>
+                <div class="relative">
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        class="form-input w-full px-4 py-3 rounded-lg pr-12" 
+                        placeholder="Ingrese su contraseña"
+                        required
+                        autocomplete="current-password">
+                    <button 
+                        type="button" 
+                        id="toggle-password" 
+                        class="absolute right-3 top-1/2 transform -translate-y-1/2 text-hospital-text-secondary hover:text-hospital-secondary transition-colors">
+                        <i class="fas fa-eye" id="password-icon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Opciones adicionales -->
+            <div class="flex items-center justify-between text-sm">
+                <label class="flex items-center text-hospital-text-secondary">
+                    <input type="checkbox" class="mr-2 rounded border-hospital-border focus:ring-hospital-secondary">
+                    <span>Recordar sesión</span>
+                </label>
+                <a href="#forgot-password" class="text-hospital-secondary hover:text-hospital-primary font-medium">
+                    ¿Olvidó su contraseña?
+                </a>
+            </div>
+
+            <!-- Botón de ingreso -->
+            <button 
+                type="submit" 
+                class="btn-login w-full py-3 px-6 text-white font-semibold rounded-lg flex items-center justify-center gap-2">
+                <i class="fas fa-sign-in-alt"></i>
+                <span id="login-text">Ingresar a Intranet</span>
+                <div id="loading-spinner" class="hidden">
+                    <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                </div>
+            </button>
+        </form>
+
+        <!-- Información adicional -->
+        <div class="mt-8 pt-6 border-t border-hospital-border">
+            <div class="text-center space-y-3">
+                <p class="text-xs text-hospital-text-secondary">
+                    <i class="fas fa-info-circle mr-1"></i>
+                    Solo para personal autorizado del Hospital San Camilo
+                </p>
+                
+                <!-- Enlaces de ayuda -->
+                <div class="flex justify-center gap-4 text-xs">
+                    <a href="#" class="text-hospital-secondary hover:text-hospital-primary">
+                        <i class="fas fa-question-circle mr-1"></i>
+                        Ayuda Técnica
+                    </a>
+                    <a href="#" class="text-hospital-secondary hover:text-hospital-primary">
+                        <i class="fas fa-phone mr-1"></i>
+                        Soporte IT
+                    </a>
+                </div>
+                
+                <!-- Botón de regreso -->
+                <div class="pt-4">
+                    <a href="index.html" class="inline-flex items-center gap-2 text-hospital-text-secondary hover:text-hospital-secondary transition-colors text-sm">
+                        <i class="fas fa-arrow-left"></i>
+                        Volver al sitio web
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Elementos del DOM
+        const loginForm = document.getElementById('login-form');
+        const togglePassword = document.getElementById('toggle-password');
+        const passwordInput = document.getElementById('password');
+        const passwordIcon = document.getElementById('password-icon');
+        const errorAlert = document.getElementById('error-alert');
+        const successAlert = document.getElementById('success-alert');
+        const loginText = document.getElementById('login-text');
+        const loadingSpinner = document.getElementById('loading-spinner');
+
+        // Toggle para mostrar/ocultar contraseña
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            // Cambiar icono
+            if (type === 'password') {
+                passwordIcon.className = 'fas fa-eye';
+            } else {
+                passwordIcon.className = 'fas fa-eye-slash';
+            }
+        });
+
+        // Función para mostrar alertas
+        function showAlert(type, message = '') {
+            // Ocultar todas las alertas
+            errorAlert.style.display = 'none';
+            successAlert.style.display = 'none';
+            
+            if (type === 'error') {
+                if (message) {
+                    document.getElementById('error-message').textContent = message;
+                }
+                errorAlert.style.display = 'flex';
+            } else if (type === 'success') {
+                successAlert.style.display = 'flex';
+            }
+        }
+
+        // Función para mostrar estado de carga
+        function showLoading(loading) {
+            if (loading) {
+                loginText.style.display = 'none';
+                loadingSpinner.classList.remove('hidden');
+            } else {
+                loginText.style.display = 'inline';
+                loadingSpinner.classList.add('hidden');
+            }
+        }
+
+        // Manejo del formulario de login
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Validaciones básicas
+            if (!username || !password) {
+                showAlert('error', 'Por favor complete todos los campos.');
+                return;
+            }
+            
+            // Mostrar estado de carga
+            showLoading(true);
+            
+            // Simular autenticación (en producción esto sería una llamada al servidor)
+            setTimeout(() => {
+                showLoading(false);
+                
+                // Credenciales de demostración
+                if (username === 'admin' && password === 'hospital2024') {
+                    showAlert('success');
+                    setTimeout(() => {
+                        // En producción, redireccionar al dashboard de la intranet
+                        alert('¡Acceso autorizado!\n\nEn una implementación real, aquí se redirigiría al dashboard de la intranet del hospital.');
+                    }, 1500);
+                } else {
+                    showAlert('error', 'Usuario o contraseña incorrectos.');
+                }
+            }, 2000);
+        });
+
+        // Limpiar alertas al escribir
+        document.getElementById('username').addEventListener('input', function() {
+            errorAlert.style.display = 'none';
+        });
+
+        document.getElementById('password').addEventListener('input', function() {
+            errorAlert.style.display = 'none';
+        });
+
+        // Animación de entrada con delay
+        setTimeout(() => {
+            document.querySelector('.login-container').style.animationDelay = '0.3s';
+        }, 100);
+    </script>
+</body>
+</html> 
