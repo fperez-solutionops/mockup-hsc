@@ -884,6 +884,38 @@
             color: #1e40af;
             border-left: 3px solid #1e40af;
         }
+
+        /* Mejoras específicas para imágenes de secciones */
+        #pacientes img, #trabajo img {
+            height: auto;
+            display: block;
+        }
+        
+        /* Responsive específico para estas secciones */
+        @media (max-width: 640px) {
+            #pacientes img, #trabajo img {
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            #pacientes .container, #trabajo .container {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+        
+        @media (min-width: 641px) and (max-width: 768px) {
+            #pacientes img, #trabajo img {
+                max-width: 90%;
+            }
+        }
+        
+        @media (min-width: 769px) and (max-width: 1023px) {
+            #pacientes img, #trabajo img {
+                max-width: 75%;
+            }
+        }
     </style>
 </head>
 <body class="bg-hospital-background text-hospital-text-primary">
@@ -1716,7 +1748,7 @@
             <div class="container mx-auto px-6 text-center">
                 <h2 class="section-title">Información para Pacientes</h2>
                 <p class="section-subtitle">Aquí encontrarás guías, horarios, derechos y deberes, y todo lo que necesitas saber para tu visita o estadía en el Hospital San Camilo. Contenido próximamente.</p>
-                <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="[Doctora explicando información a un paciente con una tablet]" class="mt-8 rounded-lg shadow-lg mx-auto max-w-2xl">
+                <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="[Doctora explicando información a un paciente con una tablet]" class="mt-8 rounded-lg shadow-lg mx-auto w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl">
             </div>
         </section>
 
@@ -1724,7 +1756,7 @@
             <div class="container mx-auto px-6 text-center">
                 <h2 class="section-title">Trabaja con Nosotros</h2>
                 <p class="section-subtitle">Buscamos profesionales comprometidos con la salud y el servicio a la comunidad. Conoce nuestras oportunidades laborales y cómo puedes unirte al equipo del Hospital San Camilo. Información de postulaciones próximamente.</p>
-                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="[Equipo diverso de profesionales de la salud colaborando sonrientes]" class="mt-8 rounded-lg shadow-lg mx-auto max-w-2xl">
+                <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="[Equipo diverso de profesionales de la salud colaborando sonrientes]" class="mt-8 rounded-lg shadow-lg mx-auto w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl">
             </div>
         </section>
 
