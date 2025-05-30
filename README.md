@@ -62,12 +62,12 @@ Una página web moderna y accesible para el Hospital San Camilo de San Felipe, d
 
 ## 🚀 Demo en Vivo
 
-👉 **[Ver Sitio en GitHub Pages](https://tu-usuario.github.io/hospital-san-camilo)**
+👉 **[Ver Sitio en GitHub Pages](https://fperez-solutionops.github.io/mockup-hsc/)**
 
 ## 📂 Estructura del Proyecto
 
 ```
-hospital-san-camilo/
+mockup-hsc/
 ├── index.html (renombrado de hospitalsancamilo.html)
 ├── README.md
 ├── assets/
@@ -81,8 +81,8 @@ hospital-san-camilo/
 
 1. **Clonar el repositorio**:
    ```bash
-   git clone https://github.com/tu-usuario/hospital-san-camilo.git
-   cd hospital-san-camilo
+   git clone https://github.com/fperez-solutionops/mockup-hsc.git
+   cd mockup-hsc
    ```
 
 2. **Abrir en el navegador**:
@@ -147,15 +147,16 @@ Las variables CSS están definidas en `:root` para fácil personalización:
    - Source: Deploy from a branch
    - Branch: main
    - Folder: / (root)
-5. **¡Listo!** Tu sitio estará disponible en `https://tu-usuario.github.io/hospital-san-camilo`
+5. **¡Listo!** Tu sitio estará disponible en `https://fperez-solutionops.github.io/mockup-hsc/`
 
 ## 📋 Lista de Verificación para Deploy
 
-- [ ] Renombrar archivo principal a `index.html`
-- [ ] Verificar que todas las imágenes cargan correctamente
-- [ ] Probar en dispositivos móviles
-- [ ] Validar HTML y CSS
-- [ ] Verificar accesibilidad
+- [x] Renombrar archivo principal a `index.html`
+- [x] Verificar que todas las imágenes cargan correctamente
+- [x] Probar en dispositivos móviles
+- [x] Validar HTML y CSS
+- [x] Verificar accesibilidad
+- [ ] Configurar GitHub Pages
 - [ ] Configurar dominio personalizado (opcional)
 
 ## 🤝 Contribuciones
@@ -185,7 +186,7 @@ Este proyecto está bajo la Licencia MIT. Ver `LICENSE` para más detalles.
 
 ## 👥 Créditos
 
-- **Diseño y Desarrollo**: [Tu Nombre]
+- **Diseño y Desarrollo**: [Fabián Pérez - SolutionOPS](https://github.com/fperez-solutionops)
 - **Imágenes**: Unsplash.com
 - **Iconos**: Font Awesome
 - **Tipografía**: Google Fonts (Inter)
@@ -193,11 +194,11 @@ Este proyecto está bajo la Licencia MIT. Ver `LICENSE` para más detalles.
 
 ## 📞 Contacto
 
-**Hospital San Camilo** (Ejemplo)
+**Hospital San Camilo** (Mockup)
 - 📧 Email: contacto@hospitalsancamilo.cl
 - 📱 Teléfono: (+56) 34 259-1234
 - 🏥 Dirección: Av. Miraflores 2085, San Felipe
-- 🌐 Web: [GitHub Pages URL]
+- 🌐 Web: [https://fperez-solutionops.github.io/mockup-hsc/](https://fperez-solutionops.github.io/mockup-hsc/)
 
 ---
 

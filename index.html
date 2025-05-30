@@ -75,6 +75,37 @@
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--hospital-border);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+        
+        /* Responsive fixes */
+        @media (max-width: 1023px) {
+            .container {
+                max-width: 100%;
+                overflow-x: hidden;
+            }
+            
+            .hero-banner {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .hero-banner h2 {
+                font-size: 2rem;
+                line-height: 1.2;
+            }
+            
+            .hero-banner p {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Prevenir overflow horizontal */
+        html, body {
+            overflow-x: hidden;
+            max-width: 100vw;
         }
         
         .logo-enhanced {
@@ -84,6 +115,7 @@
             border-radius: 0.75rem;
             background: var(--hospital-light-blue);
             transition: all 0.3s ease;
+            flex-shrink: 0;
         }
         
         .logo-enhanced:hover {
@@ -639,19 +671,19 @@
     </div>
 
     <header class="main-header sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4">
-            <!-- Header Principal -->
-            <div class="flex flex-col lg:flex-row justify-between items-center gap-4">
-                <!-- Logo y Título Mejorado -->
-                <div class="logo-enhanced">
-                    <img src="https://placehold.co/60x60/1e40af/FFFFFF?text=HSC&font=inter" alt="Logo Hospital San Camilo" class="h-16 w-16 rounded-lg shadow-sm">
-                    <div class="ml-4">
-                        <h1 class="text-2xl font-bold text-hospital-primary">Hospital San Camilo</h1>
-                        <p class="text-sm text-hospital-text-secondary flex items-center gap-1">
+        <div class="container mx-auto px-4 py-3">
+            <!-- Header Principal Responsive -->
+            <div class="flex justify-between items-center">
+                <!-- Logo Responsive -->
+                <div class="logo-enhanced flex items-center">
+                    <img src="https://placehold.co/60x60/1e40af/FFFFFF?text=HSC&font=inter" alt="Logo Hospital San Camilo" class="h-10 w-10 md:h-16 md:w-16 rounded-lg shadow-sm">
+                    <div class="ml-2 md:ml-4">
+                        <h1 class="text-lg md:text-2xl font-bold text-hospital-primary">Hospital San Camilo</h1>
+                        <p class="hidden md:flex text-sm text-hospital-text-secondary items-center gap-1">
                             <i class="fas fa-map-marker-alt"></i>
                             San Felipe de Aconcagua
                         </p>
-                        <div class="flex gap-2 mt-1">
+                        <div class="hidden md:flex gap-2 mt-1">
                             <span class="service-indicator service-available">
                                 <i class="fas fa-check"></i>
                                 Acreditado MINSAL
@@ -660,35 +692,32 @@
                     </div>
                 </div>
 
-                <!-- Sección de Búsqueda y Acciones Rápidas -->
-                <div class="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">
-                    <!-- Búsqueda Mejorada -->
-                    <div class="search-enhanced w-full sm:w-auto">
-                        <i class="fas fa-search search-icon"></i>
-                        <input type="search" placeholder="Buscar especialidades, médicos, servicios..." class="w-full">
-                    </div>
-                    
-                    <!-- Acciones Rápidas -->
-                    <div class="quick-actions">
-                        <a href="#urgencias" class="quick-action-btn btn-emergency">
+                <!-- Acciones Rápidas Desktop + Hamburguesa Mobile -->
+                <div class="flex items-center gap-2">
+                    <!-- Acciones Rápidas Desktop -->
+                    <div class="hidden lg:flex items-center gap-2">
+                        <a href="#urgencias" class="quick-action-btn btn-emergency text-xs">
                             <i class="fas fa-ambulance"></i>
                             Urgencias
                         </a>
-                        <a href="#agendar" class="quick-action-btn btn-appointment">
+                        <a href="#agendar" class="quick-action-btn btn-appointment text-xs">
                             <i class="fas fa-calendar-plus"></i>
                             Agendar
                         </a>
-                        <a href="#intranet" class="quick-action-btn btn-intranet">
-                            <i class="fas fa-user-md"></i>
-                            Intranet
-                        </a>
                     </div>
+                    
+                    <!-- Botón Hamburguesa Mobile -->
+                    <button id="mobile-menu-button" class="lg:hidden p-2 rounded-md text-hospital-primary hover:bg-hospital-light-blue transition-colors">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
 
-            <!-- Navegación Mejorada -->
-            <nav class="nav-enhanced mt-4">
-                <ul class="flex flex-wrap justify-center lg:justify-start items-center gap-2">
+            <!-- Navegación Desktop -->
+            <nav class="hidden lg:block nav-enhanced mt-4">
+                <ul class="flex justify-start items-center gap-2">
                     <li>
                         <a href="#inicio" class="nav-link-enhanced active">
                             <i class="fas fa-home"></i>
@@ -732,6 +761,69 @@
                         </a>
                     </li>
                 </ul>
+            </nav>
+
+            <!-- Menú Mobile (Oculto por defecto) -->
+            <nav id="mobile-menu" class="lg:hidden hidden bg-white border-t border-hospital-border mt-3 pt-3">
+                <ul class="flex flex-col space-y-1">
+                    <li>
+                        <a href="#inicio" class="mobile-nav-link active flex items-center gap-3 px-4 py-3 text-hospital-primary bg-hospital-light-blue rounded-md">
+                            <i class="fas fa-home w-5"></i>
+                            Inicio
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#nosotros" class="mobile-nav-link flex items-center gap-3 px-4 py-3 text-hospital-text-primary hover:bg-hospital-light-blue rounded-md transition-colors">
+                            <i class="fas fa-hospital w-5"></i>
+                            Nosotros
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#servicios" class="mobile-nav-link flex items-center gap-3 px-4 py-3 text-hospital-text-primary hover:bg-hospital-light-blue rounded-md transition-colors">
+                            <i class="fas fa-stethoscope w-5"></i>
+                            Servicios Clínicos
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#pacientes" class="mobile-nav-link flex items-center gap-3 px-4 py-3 text-hospital-text-primary hover:bg-hospital-light-blue rounded-md transition-colors">
+                            <i class="fas fa-user-injured w-5"></i>
+                            Pacientes
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#noticias" class="mobile-nav-link flex items-center gap-3 px-4 py-3 text-hospital-text-primary hover:bg-hospital-light-blue rounded-md transition-colors">
+                            <i class="fas fa-newspaper w-5"></i>
+                            Noticias
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#trabajo" class="mobile-nav-link flex items-center gap-3 px-4 py-3 text-hospital-text-primary hover:bg-hospital-light-blue rounded-md transition-colors">
+                            <i class="fas fa-briefcase-medical w-5"></i>
+                            Trabaja con Nosotros
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#contacto" class="mobile-nav-link flex items-center gap-3 px-4 py-3 text-hospital-text-primary hover:bg-hospital-light-blue rounded-md transition-colors">
+                            <i class="fas fa-phone w-5"></i>
+                            Contacto
+                        </a>
+                    </li>
+                </ul>
+                
+                <!-- Acciones Rápidas Mobile -->
+                <div class="border-t border-hospital-border mt-4 pt-4 pb-2">
+                    <p class="text-sm font-semibold text-hospital-text-secondary px-4 mb-3">Acceso Rápido:</p>
+                    <div class="grid grid-cols-2 gap-2 px-4">
+                        <a href="#urgencias" class="quick-action-btn btn-emergency text-sm justify-center">
+                            <i class="fas fa-ambulance"></i>
+                            Urgencias
+                        </a>
+                        <a href="#agendar" class="quick-action-btn btn-appointment text-sm justify-center">
+                            <i class="fas fa-calendar-plus"></i>
+                            Agendar
+                        </a>
+                    </div>
+                </div>
             </nav>
         </div>
     </header>
@@ -1446,8 +1538,47 @@
 
     <script>
         document.getElementById('currentYear').textContent = new Date().getFullYear();
+        
+        // Selecciones para navegación
         const navLinks = document.querySelectorAll('.nav-link-enhanced');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
         const headerNav = document.querySelector('header nav');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // Funcionalidad del menú hamburguesa
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+            
+            // Cambiar icono del botón hamburguesa
+            const icon = this.querySelector('svg path');
+            if (mobileMenu.classList.contains('hidden')) {
+                // Mostrar icono hamburguesa
+                icon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+            } else {
+                // Mostrar icono X
+                icon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+            }
+        });
+
+        // Cerrar menú móvil al hacer clic en un enlace
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+                // Restaurar icono hamburguesa
+                const icon = mobileMenuButton.querySelector('svg path');
+                icon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+            });
+        });
+
+        // Cerrar menú móvil al cambiar el tamaño de ventana
+        window.addEventListener('resize', function() {
+            if (window.innerWidth >= 1024) { // lg breakpoint
+                mobileMenu.classList.add('hidden');
+                const icon = mobileMenuButton.querySelector('svg path');
+                icon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+            }
+        });
 
         // Función para actualizar el enlace activo basado en el scroll
         function updateActiveLinkOnScroll() {
@@ -1461,10 +1592,24 @@
                 }
             });
 
+            // Actualizar enlaces desktop
             navLinks.forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('href') === `#${currentSectionId}`) {
                     link.classList.add('active');
+                }
+            });
+
+            // Actualizar enlaces móviles
+            mobileNavLinks.forEach(link => {
+                link.classList.remove('active');
+                link.classList.remove('text-hospital-primary', 'bg-hospital-light-blue');
+                link.classList.add('text-hospital-text-primary');
+                
+                if (link.getAttribute('href') === `#${currentSectionId}`) {
+                    link.classList.add('active');
+                    link.classList.remove('text-hospital-text-primary');
+                    link.classList.add('text-hospital-primary', 'bg-hospital-light-blue');
                 }
             });
         }
@@ -1473,29 +1618,57 @@
         window.addEventListener('scroll', updateActiveLinkOnScroll);
         updateActiveLinkOnScroll();
 
-        // Manejo de clic en enlaces de navegación
+        // Función para manejar navegación suave
+        function handleNavigation(link) {
+            const targetId = link.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+
+            if (targetSection) {
+                let headerHeight = headerNav.closest('header').offsetHeight || 0;
+                let targetPosition = targetSection.offsetTop - headerHeight - 40;
+                
+                if (targetId === '#inicio') {
+                    targetPosition = 0;
+                }
+
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+
+                // Actualizar estados activos
+                navLinks.forEach(nav => nav.classList.remove('active'));
+                mobileNavLinks.forEach(nav => {
+                    nav.classList.remove('active', 'text-hospital-primary', 'bg-hospital-light-blue');
+                    nav.classList.add('text-hospital-text-primary');
+                });
+
+                // Activar el enlace correcto
+                const activeDesktopLink = document.querySelector(`.nav-link-enhanced[href="${targetId}"]`);
+                const activeMobileLink = document.querySelector(`.mobile-nav-link[href="${targetId}"]`);
+                
+                if (activeDesktopLink) activeDesktopLink.classList.add('active');
+                if (activeMobileLink) {
+                    activeMobileLink.classList.add('active');
+                    activeMobileLink.classList.remove('text-hospital-text-primary');
+                    activeMobileLink.classList.add('text-hospital-primary', 'bg-hospital-light-blue');
+                }
+            }
+        }
+
+        // Manejo de clic en enlaces de navegación desktop
         navLinks.forEach(link => {
             link.addEventListener('click', function(event) {
                 event.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
+                handleNavigation(this);
+            });
+        });
 
-                if (targetSection) {
-                    let headerHeight = headerNav.closest('header').offsetHeight || 0;
-                    let targetPosition = targetSection.offsetTop - headerHeight - 40;
-                    
-                    if (targetId === '#inicio') {
-                        targetPosition = 0;
-                    }
-
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-
-                    navLinks.forEach(nav => nav.classList.remove('active'));
-                    this.classList.add('active');
-                }
+        // Manejo de clic en enlaces de navegación móvil
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                handleNavigation(this);
             });
         });
 
